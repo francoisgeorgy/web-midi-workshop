@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "inferno": "^1.4.2",
-    "inferno-component": "^1.4.2"
+    "inferno-component": "^1.4.2",
+    "spectre.css": "^0.2.10"
   },
   "devDependencies": {
     "inferno-scripts": "1.0.0"
