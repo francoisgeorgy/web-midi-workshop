@@ -1,31 +1,211 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tag above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <title>Web MIDI Lab</title>
+    <meta name="description" content="Test Web MIDI in your browser">
+    <meta name="author" content="francois.georgy@gmail.com">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/spectre.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="js/nexusUI.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <section class="navbar-primary">
+            <a href="#" class="navbar-brand mr-10">Web MIDI Lab</a>
+        </section>
+        <section class="navbar-section">
+            <a href="#" class="btn btn-link">Messages</a>
+            <a href="#" class="btn btn-link">SysEx</a>
+            <a href="#" class="btn btn-link">Doc</a>
+        </section>
+        <section class="navbar-section">
+            <a href="https://github.com/francoisgeorgy/web-midi-lab" class="btn-link">GitHub</a>
+        </section>
+    </header>
+    <div class="container">
+        <div class="columns col-gapless">
+            <div class="column col-4">
+                <div>
+                    <h4>Inputs</h4>
+                    <div class="form-group">
+                        <label class="form-switch">
+                            <input type="checkbox" /><i class="form-icon"></i> Device abc
+                        </label><br />
+                        <label class="form-switch">
+                            <input type="checkbox" /><i class="form-icon"></i> Device xyz
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="column col-4">
+                <div>
+                    <h4>Outputs</h4>
+                    <div class="form-group">
+                        <label class="form-switch">
+                            <input type="checkbox" /><i class="form-icon"></i> Device abc
+                        </label><br />
+                        <label class="form-switch">
+                            <input type="checkbox" /><i class="form-icon"></i> Device xyz
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="column col-4">
+                <div>
+                    <h4>Options</h4>
+                    <div class="form-group">
+                        <label class="form-switch">
+                            <input type="checkbox" /><i class="form-icon"></i> Option 1
+                        </label><br />
+                        <label class="form-switch">
+                            <input type="checkbox" /><i class="form-icon"></i> Option 2
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column col-12">
+                <div>
+                    <h4>Messages</h4>
+                    <div>
+                        <div class="form-group">
+                            <label class="form-radio">
+                                <input type="radio" name="msg-opt-1" />
+                                <i class="form-icon"></i> option 1
+                            </label>
+                            <label class="form-radio">
+                                <input type="radio" name="msg-opt-2" checked />
+                                <i class="form-icon"></i> option 2
+                            </label>
+                            <label class="form-switch">
+                                <input type="checkbox" /><i class="form-icon"></i> bin
+                            </label>
+                            <label class="form-switch">
+                                <input type="checkbox" /><i class="form-icon"></i> dec
+                            </label>
+                            <label class="form-switch">
+                                <input type="checkbox" /><i class="form-icon"></i> hex
+                            </label>
+                        </div>
+                    </div>
+                    <div id="messages">oeiuhrieuhrgiuerhg</div>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column col-6">
+                <div>
+                    <h4>Controlers</h4>
+                    <div>
+                        <table>
+                            <tr>
+                                <td>
+                                    <canvas id="d1" nx="dial" min="0" max="127" label="C1" height="80" width="80"></canvas>
+                                    <canvas id="d2" nx="dial" min="0" max="127" label="C2" height="80" width="80"></canvas>
+                                    <canvas id="d3" nx="dial" min="0" max="127" label="C3" height="80" width="80"></canvas>
+                                    <canvas id="d4" nx="dial" min="0" max="127" label="C4" height="80" width="80"></canvas>
+                                    <br/>
+                                    <canvas id="d5" nx="dial" min="0" max="127" label="C5" height="80" width="80"></canvas>
+                                    <canvas id="d6" nx="dial" min="0" max="127" label="C6" height="80" width="80"></canvas>
+                                    <canvas id="d7" nx="dial" min="0" max="127" label="C7" height="80" width="80"></canvas>
+                                    <canvas id="d8" nx="dial" min="0" max="127" label="C8" height="80" width="80"></canvas>
+                                </td>
+                                <td>
+                                    <canvas id="s1" nx="slider" min="0" max="127" label="C9" class="nx" width="30" height="160"></canvas>
+                                    &nbsp;
+                                    <canvas id="s2" nx="slider" min="0" max="127" label="C10" class="nx" width="30" height="160"></canvas>
+                                    &nbsp;
+                                    <canvas id="s3" nx="slider" min="0" max="127" label="C11" class="nx" width="30" height="160"></canvas>
+                                    &nbsp;
+                                    <canvas id="s4" nx="slider" min="0" max="127" label="C12" class="nx" width="30" height="160"></canvas>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="column col-6">
+                <h5>controllers mapping:</h5>
+            </div>
+        </div>
+        <div class="columns col-12">
+            <div class="column col-12">
+                <div>
+                    <h4>Keyboard</h4>
+                    <div class="form-group">
+                        <label class="form-switch">
+                            <input type="checkbox" /><i class="form-icon"></i> Sustain (&#8984;-click to release all)
+                        </label>
+                    </div>
+                    <div>
+                        <canvas nx="keyboard" width="800" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="columns col-12">
+            <div class="column col-12">
+                <div>
+                    <h4>Sequencer</h4>
+                    <div>
+                        <i class="material-icons">fast_rewind</i>
+                        <i class="material-icons">stop</i>
+                        <i class="material-icons">play_arrow</i>
+                        <i class="material-icons">repeat</i>
+                        <div>
+                            <canvas nx="matrix" width="800" height="80"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        nx.onload = function () {
+            nx.colorize("#00CCFF"); // sets accent (default) 
+            d1.on('*', function (e) { console.log(e); });
+            d1.val.value = Math.random() * 127;
+            d1.draw();
+            d2.val.value = Math.random() * 127;
+            d2.draw();
+            d3.val.value = Math.random() * 127;
+            d3.draw();
+            d4.val.value = Math.random() * 127;
+            d4.draw();
+            d5.val.value = Math.random() * 127;
+            d5.draw();
+            d6.val.value = Math.random() * 127;
+            d6.draw();
+            d7.val.value = Math.random() * 127;
+            d7.draw();
+            d8.val.value = Math.random() * 127;
+            d8.draw();
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Inferno App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+            s1.hslider = false;
+            s1.val.value = Math.random() * 127;
+            //nx.labelSize(22);
+            s1.draw();
+            s2.hslider = false;
+            s2.val.value = Math.random() * 127;
+            s2.draw();
+            s3.hslider = false;
+            s3.val.value = Math.random() * 127;
+            s3.draw();
+            s4.hslider = false;
+            s4.val.value = Math.random() * 127;
+            s4.draw();
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+            keyboard1.octaves = 7;
+            keyboard1.init();
 
-      To begin the development, run `npm start`.
-      To create a production bundle, use `npm run build`.
-    -->
-  </body>
+            matrix1.row = 2;
+            matrix1.col = 16;
+            matrix1.init()
+        }
+    </script>
+</body>
 </html>
